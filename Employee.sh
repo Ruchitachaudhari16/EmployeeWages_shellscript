@@ -1,10 +1,16 @@
 isPartTime=1;
 isFullTime=2;
-totalSalary=0;
-empRatePerHr=20;
+MAX_HRS_IN_MONTH=10;
+empRatePerHr=100;
 numWorkingDays=20;
-for(( day=1; day<=$numWorkingDays; day++ ))
+#Variables
+totalEmpHr=100;
+totalWorkingDays=20;
+
+while [[ $totalEmpHr -lt $MAX_HRS_IN_MONTH && $totalWorkingDays -lt $numWorkingdays ]]
+
 do
+ (( totalWorkingDays++ ))
      empCheck=$((RANDOM%3));
 
 case $empCheck in
@@ -15,11 +21,12 @@ case $empCheck in
            empHrs=4
           ;;
           *)
-       empHrs=1
+       empHrs=0
            ;;
 esac
-salary=$(($empHrs*$empRatePerHr));
-
-totalSalary=$(($totalSalary+$salary));
-echo "Total Salary:$totalSalary "
+totalEmpHrs=$(($totalEmpHr+$empHrs))
+echo "Total Emp hrs:$totalEmpHrs";
 done
+
+totalSalary=$(( $totalSalary+$empRatePerHr ));
+echo "Salary is :$totalSalary";
